@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Download NAVAll.txt
+curl -s https://www.amfiindia.com/spages/NAVAll.txt -o NAVAll.txt
+
+# Extract "Scheme Name" (column 4) and "Net Asset Value" (column 5) as TSV
+awk -F';' 'NR>1 && NF>=5 {print $4 "\t" $5}' NAVAll.txt > nav_data.tsv
+
+echo "Extraction completed. Data saved in nav_data.tsv"
